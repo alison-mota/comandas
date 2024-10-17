@@ -1,6 +1,6 @@
 package com.comandas.comandas.cliente
 
-import com.comandas.comandas.utils.URL_V1_CLIENTE
+import com.comandas.comandas.utils.URL_V1
 import com.comandas.comandas.utils.jsonClienteRequest200
 import com.github.tomakehurst.wiremock.client.WireMock
 import io.mockk.unmockkAll
@@ -39,7 +39,7 @@ class ClienteControllerTest {
         @Test
         fun `deve cadastrar um cliente quando o endpoint for chamado`() {
             mockMvc.perform(
-                post(URL_V1_CLIENTE)
+                post(URL_V1)
                     .content(jsonClienteRequest200)
                     .contentType(MediaType.APPLICATION_JSON)
                     .accept(MediaType.APPLICATION_JSON)
@@ -59,7 +59,7 @@ class ClienteControllerTest {
         fun retornoMockado() {
             WireMock.stubFor(
                 WireMock
-                    .post(WireMock.urlEqualTo(URL_V1_CLIENTE))
+                    .post(WireMock.urlEqualTo(URL_V1))
                     .willReturn(
                         WireMock.aResponse()
                             .withStatus(HttpStatus.OK.value())
@@ -77,7 +77,7 @@ class ClienteControllerTest {
         fun `deve cadastrar um cliente quando o endpoint for chamado`() {
             val headers = HttpHeaders()
             val temp = HttpEntity<String>(headers)
-            val response = restTemplate.exchange(URL_V1_CLIENTE, HttpMethod.POST, temp, String::class.java)
+            val response = restTemplate.exchange(URL_V1, HttpMethod.POST, temp, String::class.java)
 
             val temp2 = "adfaf"
         }
